@@ -29,8 +29,8 @@ import           Development.IDE.Core.RuleTypes
 import           Development.IDE.Core.Service
 import           Development.IDE.Core.Shake
 import           Development.IDE.GHC.Compat
-import           Development.IDE.Graph          (Action)
-import           Development.IDE.Graph.Database (shakeLastBuildKeys)
+import           Development.IDE.Graph           (Action)
+import           Development.IDE.Graph.Database  (shakeLastBuildKeys)
 import           Development.IDE.Types.Action
 import           Development.IDE.Types.HscEnvEq  (HscEnvEq (hscEnv))
 import           Development.IDE.Types.Location  (fromUri)
@@ -123,7 +123,6 @@ parseAction "getparsedmodule" fp = Right . isJust <$> use GetParsedModule fp
 parseAction "ghcsession" fp = Right . isJust <$> use GhcSession fp
 parseAction "ghcsessiondeps" fp = Right . isJust <$> use GhcSessionDeps fp
 parseAction "gethieast" fp = Right . isJust <$> use GetHieAst fp
-parseAction "getDependencies" fp = Right . isJust <$> use GetDependencies fp
 parseAction "getFileContents" fp = Right . isJust <$> use GetFileContents fp
 parseAction other _ = return $ Left $ "Cannot parse ide rule: " <> pack (original other)
 

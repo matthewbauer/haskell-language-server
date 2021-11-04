@@ -84,8 +84,7 @@
               lsp-test = hself.lsp-test_0_14_0_1;
             };
 
-          hlsSources =
-            builtins.mapAttrs (_: dir: gitignoreSource dir) sourceDirs;
+          hlsSources = sourceDirs;
 
           extended = hpkgs:
             (hpkgs.override (old: {

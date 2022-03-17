@@ -130,8 +130,7 @@
                 else hsuper.ormolu;
             };
 
-          hlsSources =
-            builtins.mapAttrs (_: dir: gitignoreSource dir) sourceDirs;
+          hlsSources = sourceDirs;
 
           extended = hpkgs:
             (hpkgs.override (old: {

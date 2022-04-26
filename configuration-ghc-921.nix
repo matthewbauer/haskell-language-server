@@ -17,6 +17,11 @@ let
   hpkgsOverride = hself: hsuper:
     with pkgs.haskell.lib;
     {
+      # haddock seems broken on aarch64-darwin for some reason
+      ghc-trace-events = if pkgs.stdenv.isDarwin && pkgs.stdenv.isAarch64 then dontHaddock hsuper.ghc-trace-events else hsuper.ghc-trace-events;
+      parsers = if pkgs.stdenv.isDarwin && pkgs.stdenv.isAarch64 then dontHaddock hsuper.parsers else hsuper.parsers;
+      prettyprinter-ansi-terminal = if pkgs.stdenv.isDarwin && pkgs.stdenv.isAarch64 then dontHaddock hsuper.prettyprinter-ansi-terminal else hsuper.prettyprinter-ansi-terminal;
+
       hlsDisabledPlugins = disabledPlugins;
 
       fourmolu = hself.callCabal2nix "fourmolu" inputs.fourmolu {};
@@ -28,6 +33,7 @@ let
       # Hlint is still broken
       hlint = doJailbreak (hself.callCabal2nix "hlint" inputs.hlint {});
       hiedb = hself.hiedb_0_4_1_0;
+      hiedb_0_4_1_0 = hself.callCabal2nix "hiedb_0_4_1_0" inputs.hiedb_0_4_1_0 {};
 
       # Re-generate HLS drv excluding some plugins
       haskell-language-server =

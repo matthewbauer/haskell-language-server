@@ -22,6 +22,11 @@
       flake = false;
     };
 
+    hiedb_0_4_1_0 = {
+      url = "github:matthewbauer/HieDb/remove-no-break-space";
+      flake = false;
+    };
+
     # List of hackage dependencies
     lsp = {
       url = "https://hackage.haskell.org/package/lsp-1.4.0.0/lsp-1.4.0.0.tar.gz";
@@ -116,6 +121,7 @@
               hie-bios = hself.callCabal2nix "hie-bios" inputs.hie-bios {};
               # We need an older version
               hiedb = hself.hiedb_0_4_1_0;
+              hiedb_0_4_1_0 = hself.callCabal2nix "hiedb_0_4_1_0" inputs.hiedb_0_4_1_0 {};
 
               lsp = hsuper.callCabal2nix "lsp" inputs.lsp {};
               lsp-types = hsuper.callCabal2nix "lsp-types" inputs.lsp-types {};
